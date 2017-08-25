@@ -1,10 +1,10 @@
 import React from "react";
-import NewTicketForm from "./NewTicketForm";
+import NewPlantForm from "./NewPlantForm";
 import PropTypes from "prop-types";
 import { Button }  from "react-bootstrap";
 import { Modal } from "react-bootstrap";
 
-class NewTicketControl extends React.Component {
+class NewPlantControl extends React.Component {
 
   constructor(props) {
     super(props);
@@ -35,18 +35,18 @@ class NewTicketControl extends React.Component {
           bsStyle="primary"
           bsSize="large"
           onClick={this.showFormModal}>
-            Request Help!
+            Add Plant
         </Button>
         <Modal
           show={this.state.formModalIsShowing}
           onHide={this.hideFormModal}
           bsSize="large">
            <Modal.Header>
-             <Modal.Title>Request Help</Modal.Title>
+             <Modal.Title>Add a new Plant to the catalog</Modal.Title>
            </Modal.Header>
            <Modal.Body>
-             <NewTicketForm
-              onNewTicketCreation={this.props.onNewTicketCreation}
+             <NewPlantForm
+              onNewPlantCreation={this.props.onNewPlantCreation}
               hideFormAfterSubmission = {this.hideFormModal}/>
            </Modal.Body>
          </Modal>
@@ -55,10 +55,10 @@ class NewTicketControl extends React.Component {
   }
 }
 
-NewTicketControl.propTypes = {
-  onNewTicketCreation: PropTypes.func,
+NewPlantControl.propTypes = {
+  onNewPlantCreation: PropTypes.func,
   hideFormAfterSubmission: PropTypes.func
 };
 
 
-export default NewTicketControl;
+export default NewPlantControl;

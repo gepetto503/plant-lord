@@ -1,6 +1,6 @@
 import React from "react";
-import TicketList from "./TicketList";
-import NewTicketControl from "./NewTicketControl";
+import PlantList from "./PlantList";
+import NewPlantControl from "./NewPlantControl";
 
 class Queue extends React.Component {
 
@@ -8,10 +8,10 @@ class Queue extends React.Component {
     console.log('constructor');
     super(props);
     this.state = {
-      masterTicketList: [],
+      masterPlantList: [],
     };
-    this.addNewTicketToList = this.addNewTicketToList.bind(this);
-    this.updateTicketTimeSinceOpened = this.updateTicketTimeSinceOpened.bind(this);
+    this.addNewPlantToList = this.addNewPlantToList.bind(this);
+    this.updatePlantTimeSinceOpened = this.updatePlantTimeSinceOpened.bind(this);
   }
 
   componentWillMount() {
@@ -21,7 +21,7 @@ class Queue extends React.Component {
   componentDidMount() {
     console.log('componentDidMount');
     this.timeSinceOpenedChecker = setInterval(() =>
-      this.updateTicketTimeSinceOpened(),
+      this.updatePlantTimeSinceOpened(),
       5000
     );
   }
@@ -47,30 +47,31 @@ class Queue extends React.Component {
     clearInterval(this.timeSinceOpenedChecker);
   }
 
-  addNewTicketToList(newTicket){
-    var newMasterTicketList = this.state.masterTicketList.slice();
-    newMasterTicketList.push(newTicket);
-    this.setState({masterTicketList: newMasterTicketList});
+  addNewPlantToList(newPlant){
+    var newMasterPlantList = this.state.masterPlantList.slice();
+    newMasterPlantList.push(newPlant);
+    this.setState({masterPlantList: newMasterPlantList});
   }
 
-  updateTicketTimeSinceOpened() {
+
+  updatePlantTimeSinceOpened() {
      console.log("check");
-     //this whole blob breaks up the stateful array into a temporary new array and then.. what? updates the time on each ticket?
-     let newMasterTicketList = this.state.masterTicketList.slice();
-     newMasterTicketList.forEach((ticket) =>
-       ticket.setTimeSinceOpened()
+     //this whole blob breaks up the stateful array into a temporary new array and then.. what? updates the time on each plant?
+     let newMasterPlantList = this.state.masterPlantList.slice();
+     newMasterPlantList.forEach((plant) =>
+       plant.setTimeSinceOpened()
      );
      console.log('setState');
-     this.setState({masterTicketList:newMasterTicketList})
+     this.setState({masterPlantList:newMasterPlantList})
   }
 
   render(){
     console.log('render');
     return (
       <div>
-        <TicketList
-          ticketList = {this.state.masterTicketList}/>
-        <NewTicketControl onNewTicketCreation = {this.addNewTicketToList}/>
+        <PlantList
+          plantList = {this.state.masterPlantList}/>
+        <NewPlantControl onNewPlantCreation = {this.addNewPlantToList}/>
       </div>
     );
   }
